@@ -7,9 +7,32 @@ const server = http.createServer((req, res) => {
     //set header content type
     res.setHeader('Content-Type', 'text/html')
 
-    res.write('<p>Hello Philip</p>')
-    res.write('<p>You like Node?</p>')
-    res.end()
+    let path = './views/'
+    switch(req.url) {
+        case '/':
+            path += 'index.html';
+            res.statusCode = 200
+            break;
+        case '/about':
+            path += 'about.html';
+            res.statusCode = 200
+            break;
+        default:
+            path += '404.html'
+            res.statusCode = 404
+            break;
+    }
+
+    //Send an html file to the browser
+    fs.readFile(path, (err, data) => {
+        if(err) {
+            console.log(err)
+            res.end()
+        } else {
+            res.write(data);
+            res.end()
+        }
+    })
 })
 
 server.listen(3000, 'localhost', () => {
