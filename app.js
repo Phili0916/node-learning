@@ -11,7 +11,12 @@ app.set('view engine', 'ejs')
 app.listen(3000)
 
 app.get('/', (req, res) => {
-    res.render('index', {title: 'Home'});
+    const films = [
+        {title: 'A New Hope', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor'},
+        {title: 'The Empire Strikes Back', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor'},
+        {title: 'The Return of the Jedi', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor'}
+    ];
+    res.render('index', {title: 'Home', films});
 })
 
 app.get('/about', (req, res) => {
